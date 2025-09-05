@@ -1,58 +1,96 @@
-import { useUser } from "@civic/auth-web3/react";
-import { useCallback } from "react";
-import Logo from "/logo.png";
+import { useState, useEffect, useRef } from "react";
 
 export default function Header() {
-  const { signIn, user } = useUser();
+  const [musicEnabled, setMusicEnabled] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const doSignIn = useCallback(() => {
-    console.log("[Page] Starting sign-in process");
-    signIn()
-      .then(() => {
-        console.log("[Page] Sign in completed successfully");
-      })
-      .catch((error) => {
-        console.error("[Page] Sign in failed:", error);
+  const toggleMusic = () => {
+    setMusicEnabled((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (musicEnabled) {
+      audio.play().catch((err) => {
+        console.warn("Audio play failed:", err);
       });
-  }, [signIn]);
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, [musicEnabled]);
 
   return (
-    <header>
-      {!user && (
-        <div
+    <header
+      style={{
+        position: "fixed",
+        top: "12px",
+        right: "20px",
+        zIndex: 1000,
+      }}
+    >
+      <div
+        style={{
+          height: "4vh",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <button
+          onClick={toggleMusic}
           style={{
-            width: "100%",
-            height: "4vh",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
-            position: "sticky",
-            top: "0",
-            left: "0",
-            padding: "12px 2rem"
+            justifyContent: "center",
+            gap: "4px",
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            border: "1px solid #6b7280",
+            backgroundColor: "transparent",
+            cursor: "pointer",
+            padding: "6px",
           }}
         >
-          <img src={Logo} alt="logo" />
-          <button
-            onClick={doSignIn}
-            style={{
-              display: "flex",
-              cursor: "pointer",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "0.5rem",
-              borderRadius: "9999px",
-              border: "1px solid #6b7280",
-              padding: "6px",
-              textAlign: "center",
-              color: "#fff",
-              fontSize: "small"
-            }}
-          >
-            Sign in
-          </button>
-        </div>
-      )}
+          {[...Array(5)].map((_, i) => (
+            <span
+              key={i}
+              style={{
+                width: "3px",
+                height: "12px",
+                backgroundColor: "#fff",
+                transformOrigin: "center",
+                animationName: musicEnabled ? "equalize" : "none",
+                animationDuration: "1.5s",
+                animationTimingFunction: "ease-in-out",
+                animationIterationCount: "infinite",
+                animationDelay: `${i * 0.2}s`,
+              }}
+            />
+          ))}
+        </button>
+      </div>
+
+      {/* Audio element */}
+      <audio
+        ref={audioRef}
+        src="/sounds/music.mp3"
+        loop
+        preload="auto"
+      />
+
+      {/* Equalizer animation */}
+      <style>{`
+        @keyframes equalize {
+          0%   { transform: scaleY(1); }
+          25%  { transform: scaleY(1.8); }
+          50%  { transform: scaleY(0.6); }
+          75%  { transform: scaleY(1.4); }
+          100% { transform: scaleY(1); }
+        }
+      `}</style>
     </header>
   );
 }

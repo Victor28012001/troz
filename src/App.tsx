@@ -12,7 +12,7 @@ function App() {
           display: "flex",
           flexDirection: "column",
           gap: "1rem",
-          margin: "30px auto",
+          position: "relative",
         }}
       >
         <Header />

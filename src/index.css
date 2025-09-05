@@ -6,8 +6,17 @@
   font-style: normal;
 }
 
+@font-face {
+ font-family: 'Michroma-Regular';
+ src: url('/fonts/Michroma-Regular.ttf') format('truetype');
+}
+
 .font-electro {
   font-family: 'Electroharmonix', sans-serif;
+}
+
+.font-michroma {
+  font-family: 'Michroma-Regular', sans-serif;
 }
 
 :root {
@@ -17,7 +26,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -40,4 +49,41 @@ body{
   width: 100%;
   margin: 0 auto;
   text-align: center;
+}
+
+html::-webkit-scrollbar {
+  width: 0;  /* overall scrollbar width */
+  display: none;
+}
+
+html::-webkit-scrollbar-track {
+  width: 0;  /* track width is kind of visual "background" */
+  background: transparent;
+  display: none;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 10px;
+  min-height: 20px;
+  width: 3px;
+  display: none;
+}
+
+html::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html::-webkit-scrollbar-corner {
+  background: transparent !important;
+  display: none;
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: 0; /* "auto" or "thin" */
+  scrollbar-color: transparent;
+  /* display: none; */
 }
