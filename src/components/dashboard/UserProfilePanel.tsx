@@ -68,6 +68,7 @@ export const UserProfilePanel: React.FC<UserProfileProps> = ({ user }) => {
     >
       {/* Left column */}
       <div style={{maxWidth: "600px", width: "100%"}}>
+        <h2 className="font-michroma font-black " style={{ marginBottom: "1rem" }}>Character Customization</h2>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <img
             src={avatarUrl}

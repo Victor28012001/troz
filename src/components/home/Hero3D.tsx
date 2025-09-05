@@ -15,6 +15,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CameraRig } from "./CameraRig";
 import { FloatingModel } from "./FloatingModel";
 import { UserProfilePanel } from "../dashboard/UserProfilePanel";
+import { CharacterPanel } from "../dashboard/CharacterPanel";
+import { LobbyPanel } from "../dashboard/LobbyPanel";
+import { AssetsPanel } from "../dashboard/AssetsPanel";
+import { ChatPanel } from "../dashboard/ChatPanel";
+import { GamesPanel } from "../dashboard/GamesPanel";
 import { getEmptyUserProfile } from "../../utils/getEmptyUserProfile";
 import { useUser, useWallet } from "@civic/auth-web3/react";
 // import { userHasWallet } from '@civic/auth-web3';
@@ -30,7 +35,7 @@ const panels = [
 
 export default function Hero3D() {
   const { user } = useUser();
-  const { address } = useWallet({ type: "solana"});
+  const { address } = useWallet({ type: "solana" });
 
   const fullUserProfile = getEmptyUserProfile({
     username: user?.username || "Unknown",
@@ -193,8 +198,27 @@ export default function Hero3D() {
               background: "rgba(0,0,0,0.2)",
             }}
           >
-            {panels[activeIndex].id === "intro" && user ? (
-              <UserProfilePanel user={fullUserProfile} />
+            {user ? (
+              <>
+                {panels[activeIndex].id === "intro" && (
+                  <UserProfilePanel user={fullUserProfile} />
+                )}
+                {panels[activeIndex].id === "panel-1" && (
+                  <CharacterPanel user={fullUserProfile} />
+                )}
+                {panels[activeIndex].id === "panel-2" && (
+                  <LobbyPanel user={fullUserProfile} />
+                )}
+                {panels[activeIndex].id === "panel-3" && (
+                  <AssetsPanel user={fullUserProfile} />
+                )}
+                {panels[activeIndex].id === "panel-4" && (
+                  <ChatPanel user={fullUserProfile} />
+                )}
+                {panels[activeIndex].id === "panel-5" && (
+                  <GamesPanel user={fullUserProfile} />
+                )}
+              </>
             ) : (
               <SectionPanel
                 id={panels[activeIndex].id}
