@@ -8,7 +8,7 @@ interface AssetsPanelProps {
 export const AssetsPanel: React.FC<AssetsPanelProps> = ({ user }) => {
   return (
     <section className="panel">
-      <h2 className="font-michroma font-black " style={{ marginBottom: "1rem" }}>Assets</h2>
+      <h2 className="font-michroma font-black " style={{ marginBottom: "1rem", fontSize: "2rem" }}>Assets</h2>
       <p>{user.username}, here are your achievements and points:</p>
       <p>Points: {user.points}</p>
       <ul>

@@ -8,7 +8,7 @@ interface CharacterPanelProps {
 export const CharacterPanel: React.FC<CharacterPanelProps> = ({ user }) => {
   return (
     <section className="panel">
-      <h2 className="font-michroma font-black " style={{ marginBottom: "1rem" }}>Character Customization</h2>
+      <h2 className="font-michroma font-black " style={{ marginBottom: "1rem", fontSize: "2rem" }}>Character Customization</h2>
       <p>Welcome {user.username}, customize your avatar here!</p>
       <ul>
         {user.characters.map((char, i) => (

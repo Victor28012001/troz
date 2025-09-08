@@ -350,7 +350,7 @@ export function Model({ activeIndex }: ModelProps) {
         object={scene}
         scale={6}
         position={[0, -6.2, 1]}
-        // rotation={[-Math.PI / 2, 0, 0]}
+        rotation={[0, 0, 0]}
       />
     );
   }
@@ -362,7 +362,7 @@ export function Model({ activeIndex }: ModelProps) {
         object={scene}
         scale={6}
         position={[0, -5, 0]}
-        // rotation={[-Math.PI / 2, 0, 0]}
+        rotation={[0, 0, 0]}
       />
     );
   }
